@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento pessoal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+</head>
+<body>
+    <!-- navegacao -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="#">ICON</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#textoNavbar" aria-controls="textoNavbar" aria-expanded="false" aria-label="Alterna navegação">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="textoNavbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                    <a class="nav-link" href="#">Cadastro</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="consultar.html">Consultar</a>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        
+        <div class="col mt-5 justify-content-lg-center">
+            <p class="font-weight-light tamanho-texto-g">Registro de nova despesa</p>
+        </div>
+
+        <!-- opções -->
+        <div class="col justify-content-md-center">
+            <form>
+                <div class="form-row">
+
+                    <!-- grupo 1, valores de datas -->
+                    <div class="form-grup col-md-2">
+                        <label >Dia</label>
+                        <input type="text" class="form-control" id="dia" placeholder="Dia">
+                    </div>
+                    <div class="form-grup col-md-2">
+                        <label>Mês</label>
+                        <select class="form-control" id="mes">
+                            <option value="0">Mês</option>
+                            <option value="1">Janeiro</option>
+                            <option value="2">Fevereiro</option>
+                            <option value="3">Março</option>
+                            <option value="4">Abril</option>    
+                            <option value="5">Maio</option>
+                            <option value="6">Junho</option>
+                            <option value="7">Julho</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12">Dezembro</option>
+                        </select>
+                    </div>
+                    <div class="form-grup  col-md-2">
+                        <label >Ano</label>
+                        <select class="form-control" id="ano">
+                            <option value="0">Ano</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                        </select>
+                    </div>
+                    <div class="form-grup col-md-6">
+                        <label >Tipo</label>
+                        <select class="form-control" id="tipo">
+                            <option value="0">Tipo</option>
+                            <option value="1">Alimentação</option>
+                            <option value="2">Educação</option>
+                            <option value="3">Lazer</option>
+                            <option value="4">Saúde</option>
+                            <option value="5">Transporte</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- grupo 2, valores de descricao e valor(preço) -->
+                <div class="form-row mt-2">
+                    <div class="form-grup col-md-8">
+                        <label>Descrição</label>
+                        <input type="text" class="form-control" id="descricao">
+                    </div>
+                    <div class="form-grup col-md-2">
+                        <label >Valor</label>
+                        <input type="text" class="form-control" id="valor">
+                    </div>
+                    <div class="form-grup col-md-2">
+                        <div class="d-flex  justify-content-center">
+                            <label >Adicionar</label>
+                        </div>
+                        <div class="d-flex  justify-content-center">
+                            <button type="button" class="btn btn-primary" onclick="CadastrarDespesa()">+</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- tabela valores -->
+        <div class="col mt-5 ">
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Valor</th>
+                  </tr>
+                </thead>
+                <!-- <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                  </tr>
+                </tbody> -->
+              </table>
+        </div>
+        
+    </div>
+
+    <!-- Alerta de erro -->
+    <div class="modal fade" id="erroGravacao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-danger">
+                    <h5 class="modal-title" id="exampleModalLabel">Verifique os paramêtros</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Preencha todas as informações no formulário. Atenção para valores em branco ou com somente zero.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alerta de msg gravada -->
+    <div class="modal fade" id="sucessoGravacao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-success">
+                    <h5 class="modal-title" id="exampleModalLabel">Despesa cadastrada com sucesso!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Despesa cadastrada com sucesso!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+</body>
+</html>
