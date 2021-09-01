@@ -8,8 +8,12 @@ class Despesa{
         this.valor = valor
     }
     validarDados(){
+        if (parseInt(this.dia) > 31 || parseInt(this.dia) < 0 ){
+            return false
+        }
+        
         for(let i in this){
-            if(this[i] == undefined || this[i] == null || this[i] == '' || this[i] === '0' || this.dia >= '32'){
+            if(this[i] == undefined || this[i] == null || this[i] == '' || this[i] === '0'){
                 return false
             }
         }
